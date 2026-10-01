@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+ComicCraft — Preview
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="preview-header">
+
+    <p class="eyebrow">
+        YOUR COMIC IS READY
+    </p>
+
+    <h1>
+        Comic Preview
+    </h1>
+
+    <p>
+        Review each panel, then download
+        your finished comic.
+    </p>
+
+</section>
+
+
+<div class="actions">
+
+
+    <a
+        class="primary-button link-button"
+        href="{{ pdf_url }}"
+    >
+
+        Download Your Comic as PDF
+
+    </a>
+
+
+    <a
+        class="secondary-button"
+        href="/export-success"
+    >
+
+        View Export Success Page
+
+    </a>
+
+
+    <a
+        class="secondary-button"
+        href="/"
+    >
+
+        Create Another Comic
+
+    </a>
+
+</div>
+
+
+<section class="comic-grid">
+
+
+    {% for panel in layout %}
+
+    <article class="panel-card">
+
+
+        <div class="panel-heading">
+
+            <span>
+                Panel {{ panel.panel_number }}
+            </span>
+
+            <h2>
+                {{ panel.title }}
+            </h2>
+
+        </div>
+
+
+        <img
+            class="panel-image"
+            src="{{ panel.image_path }}"
+            alt="Comic illustration for panel {{ panel.panel_number }}"
+        >
+
+
+        <p class="scene-description">
+
+            {{ panel.scene_description }}
+
+        </p>
+
+
+        <!-- CAPTION -->
+
+        <div class="story-block">
+
+            <h3>
+                Caption
+            </h3>
+
+            <p>
+                {{ panel.caption }}
+            </p>
+
+        </div>
+
+
+        <!-- NARRATION -->
+
+        <div class="story-block">
+
+            <h3>
+                Narration
+            </h3>
+
+            <p>
+                {{ panel.narration }}
+            </p>
+
+        </div>
+
+
+        <!-- DIALOGUE -->
+
+        {% if panel.dialogue %}
+
+        <div class="story-block dialogue">
+
+            <h3>
+                Dialogue
+            </h3>
+
+            <p>
+                {{ panel.dialogue }}
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- PROMPT -->
+
+        <details>
+
+            <summary>
+                Image Prompt Reference
+            </summary>
+
+            <p>
+                {{ panel.image_prompt }}
+            </p>
+
+        </details>
+
+
+    </article>
+
+    {% endfor %}
+
+
+</section>
+
+{% endblock %}
